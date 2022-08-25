@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="seedrandom.min.js"></script>
+  <script type="text/javascript" src="modal.js"></script>
+  <script type="text/javascript" src="utils.js"></script>
+  <link rel="stylesheet" href="main.css">
+
+  <title>awkword - a daily word game</title>
+  <meta name="description" content="a daily word game"/>
+
+  <meta property="og:title" content="awkword - a daily word game"/>
+  <meta property="og:url" content="https://awkword.co"/>
+  <meta property="og:image" content="https://awkword.co/game.png"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:description" content="a daily word game"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="twitter:card" content="summary"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+<div class="body">
+  <div class="header">
+    <h1 id="logo" onclick="showHistoryAndUpdateUrl()">
+      <span id="more">☰</span>
+      <span id="daily-number"></span>
+    </h1>
+    <div id="stats" class="history-screen"></div>
+    <h1 id="make-button" class="history-screen hidden" onclick="showMakeGameAndUpdateUrl()">✎</h1>
+    <h1 id="play-hint" class="hint play-screen"></h1>
+    <h1 id="view-hint" class="hint view-screen"></h1>
+    <div id="make-hint" class="make-screen hidden">
+      <input id="make-hint-input" type="text" placeholder="word" spellcheck="false"/><span id="make-hint-count"></span>
+    </div>
+  </div>
+
+  <div id="play-container" class="play-screen">
+    <br/>
+    <div id="play-board" class="board"></div>
+    <div class="footer centered">
+      <span id="play-submit" class="action hidden" onclick="submit()">reveal</span>
+      <span id="play-share" class="action hidden" onclick="share(State.currentGameId)">share</span>
+      <br/>
+      <br/>
+      <span id="next-game" style="font-size: small;"></span>
+    </div>
+  </div>
+
+  <div id="make-container" class="make-screen">
+    <br/>
+    <div id="make-board" class="board"></div>
+    <div class="footer centered">
+      <span id="make-share" class="make-screen action hidden" onclick="makeAndShare()">share</span>
+    </div>
+  </div>
+
+  <div id="history-container" class="history-screen"></div>
+
+  <div id="view-container" class="view-screen">
+    <br/>
+    <div id="view-board" class="board"></div>
+    <div class="footer centered">
+      <span id="view-share" class="view-screen action hidden" onclick="share(State.currentGameId)">share</span>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <span id="misc" class="play-screen view-screen underlined">misc</span>
+    <span style="flex: 1"></span>
+    <div id="status" class="view-screen hidden">
+      <span id="timestamp"></span>
+      <span>|</span>
+      <span id="forget" class="underlined" onclick="forget()">forget</span>
+    </div>
+    <span id="make-random" class="make-screen underlined hidden" onclick="showMakeGame()">random</span>
+  </div>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3 style="margin-top: 5px;">awkword - a daily word game</h3>
+    <p>given a <i>word</i> and a <i>number</i>, find that many words which are <i>associated</i> with the word.</p>
+    <hr/>
+    <p>click on <b>☰</b> to view your past games and stats.</p>
+    <hr/>
+    <p>make and play other awkwords while you wait for the daily game!</p>
+    <hr/>
+    <!--    <span id="toggle-dark-mode" class="modal-button" onclick="toggleDarkMode()">dark</span>-->
+    <!--    |-->
+    <div style="margin-top: 10px">
+      <span id="clear-history" class="modal-button" onclick="clearHistory()">reset</span>
+      |
+      <a target="_blank" class="modal-button" style="text-decoration: none; color: inherit;"
+         href="https://twitter.com/awkwordgame">@awkwordgame</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
