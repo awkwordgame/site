@@ -278,7 +278,7 @@ function share(gameId) {
   } else {
     const chosenText = game.chosenIndices.map((e) => {
       return game.words[e];
-    }).join(", ");
+    }).sort().join(", ");
     text = `${game.hint}! ${chosenText}?`;
     hashtag = "awkword";
   }

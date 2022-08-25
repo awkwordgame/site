@@ -22,13 +22,13 @@ function shade(node, color) {
 
 function shadeWithBorder(node, color) {
   shade(node, color);
-  node.style.outlineStyle = "auto";
   node.style.outline = "3px solid " + adjust(color, -20);
   node.style.outlineOffset = "-3px";
+  node.style.borderRadius = "10px";
 }
 
 function adjust(color, amount) {
-  return '#' + color.replace(/^#/, '').replace(/../g, color => ('0'+Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)).substr(-2));
+  return '#' + color.replace(/^#/, '').replace(/../g, color => ('0' + Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)).substr(-2));
 }
 
 function set(id, html) {
