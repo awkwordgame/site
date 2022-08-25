@@ -47,6 +47,10 @@ input {
     border-radius: 10px;
     padding: 1em;
     font-size: medium;
+
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
 #stats {
