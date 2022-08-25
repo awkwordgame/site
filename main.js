@@ -1,5 +1,6 @@
 const State = {
   chosenIndices: new Set(),
+  guessesRemaining: 0,
   gameEnded: false,
   currentGame: {},
   showingPlay: false,
@@ -32,7 +33,7 @@ function serializeGameV1(game) {
 
 async function generateRandomGame(seed) {
   const _seed = seed || generateRandomBase64String(6);
-  const rng = new Math.seedrandom(seed);
+  const rng = new Math.seedrandom(_seed);
   const wordListId = 2; // randomize
   const wordListIndices = generateUniqueRandomNumbers(WORDS_PER_GAME, await getWordListSize(wordListId), rng);
   const words = await getWords(wordListId, wordListIndices);
@@ -66,7 +67,15 @@ function loadNewGame(game) {
     shade(cell, Colors.NOT_CHOSEN);
   });
 
+  if (isHardMode()) {
+    State.guessesRemaining = game.answerIndices.length;
+    set("guesses", `<b>${State.guessesRemaining}</b> guesses`);
+    show("guesses");
+  }
+
   hide("next-game");
+  hide("cant-wait");
+  hide("cant-wait-q");
   hide("play-submit");
   hide("play-share");
   set("more", "☰");
@@ -93,6 +102,25 @@ function createBoard(containerId, rows, cols, idFn, clickFn) {
 
 function toggle(cell) {
   if (State.gameEnded) {
+    return;
+  }
+
+  if (isHardMode()) {
+    const cellId = Number(cell.id);
+    if (State.currentGame.answerIndices.includes(cellId)) {
+      shadeWithBorder(cell, Colors.CORRECT);
+    } else {
+      shadeWithBorder(cell, Colors.CHOSEN);
+    }
+
+    State.chosenIndices.add(cellId);
+    State.guessesRemaining--;
+    set("guesses", `<b>${State.guessesRemaining}</b> guesses`);
+
+    if (State.guessesRemaining === 0) {
+      hide("guesses");
+      submit();
+    }
     return;
   }
 
@@ -169,25 +197,32 @@ async function animateBoard() {
 
 async function submit() {
   State.gameEnded = true;
-
-  await animateBoard();
-
-  State.chosenIndices.forEach((i) => {
-    const cell = $(i);
-    shade(cell, Colors.CHOSEN);
-  });
-
   let won = true;
-  State.currentGame.answerIndices.forEach((i) => {
-    const cell = $(i);
-    shade(cell, Colors.CORRECT);
+  const chosenIndices = Array.from(State.chosenIndices);
 
+  State.currentGame.answerIndices.forEach((i) => {
     if (!State.chosenIndices.has(i)) {
       won = false;
     }
-  });
+  })
 
-  State.currentGame.chosenIndices = Array.from(State.chosenIndices).sort();
+  if (!isHardMode() || isHardMode() && won) {
+    await animateBoard();
+    range(WORDS_PER_GAME).forEach((i) => {
+      const cell = $(i);
+      const chosen = chosenIndices.includes(i);
+      const correct = State.currentGame.answerIndices.includes(i);
+      if (chosen && correct) {
+        shadeWithBorder(cell, Colors.CORRECT);
+      } else if (correct) {
+        shade(cell, Colors.CORRECT);
+      } else if (chosen) {
+        shadeWithBorder(cell, Colors.CHOSEN);
+      }
+    });
+  }
+
+  State.currentGame.chosenIndices = chosenIndices.sort();
   State.currentGame.won = won;
   saveGame(State.currentGame);
 
@@ -197,12 +232,16 @@ async function submit() {
 }
 
 function showNextGame() {
-  const link = "<a href='https://awkword.co' style='color: inherit;'>play the daily awkword</a>";
+  const link = `<span class="pointer" onclick="goTo('https://awkword.co')"><b>play the daily awkword</b></span>`;
   if (isDaily(State.currentGameId)) {
     timer("next-game", "next awkword in", link, () => window.location.reload());
+    show("cant-wait");
+    show("cant-wait-q");
   } else {
     const games = localStorage.getObj("games");
-    if (!games[State.dailyGameId]) {
+    if (games[State.dailyGameId]) {
+      show("cant-wait");
+    } else {
       set("next-game", link);
     }
   }
@@ -275,7 +314,7 @@ function getStats(games) {
 function showHistoryAndUpdateUrl() {
   if (State.showingPlay) {
     showHistory();
-    updateUrlHash("", "history");
+    updateUrlHash("?", "history");
     State.showingPlay = false;
   } else {
     history.back();
@@ -342,6 +381,11 @@ function viewGame(game) {
   set("timestamp", getGameTimestamp(game));
   hydrateGame("view-hint", game, viewCellId);
   showScreen("view");
+  if (isHardMode() && !game.made) {
+    hide("forget");
+  } else {
+    show("forget");
+  }
 }
 
 function loadAlreadyPlayedGame(game) {
@@ -360,6 +404,11 @@ function loadAlreadyPlayedGame(game) {
   show("play-share");
   showScreen("play");
   show("status"); // needs to be after showScreen because it's view-screen
+  if (isHardMode() && !game.made) {
+    hide("forget");
+  } else {
+    show("forget");
+  }
 }
 
 function getGameTimestamp(game) {
@@ -392,12 +441,16 @@ function hydrateGame(hintNodeId, game, cellFn) {
 
     cell.innerText = words[i];
 
-    if (chosenIndices.includes(i)) {
-      shade(cell, Colors.CHOSEN);
-    }
-
-    if (answerIndices.includes(i)) {
-      shade(cell, Colors.CORRECT);
+    const chosen = chosenIndices.includes(i);
+    const correct = answerIndices.includes(i);
+    if (chosen && correct) {
+      shadeWithBorder(cell, Colors.CORRECT);
+    } else if (correct) {
+      if (!isHardMode() || game.made) {
+        shade(cell, Colors.CORRECT);
+      }
+    } else if (chosen) {
+      shadeWithBorder(cell, Colors.CHOSEN);
     }
   });
 }
@@ -408,7 +461,7 @@ function makeCellId(id) {
 
 async function showMakeGameAndUpdateUrl() {
   await showMakeGame();
-  updateUrlHash("", "make");
+  updateUrlHash("?", "make");
 }
 
 async function showMakeGame() {
@@ -572,12 +625,16 @@ window.addEventListener("load", async function () {
 
   $("make-hint-input").addEventListener('input', () => {
     const hint = $("make-hint-input").value.trim();
-    if (hint !== ""){
-        show("make-share");
+    if (hint !== "") {
+      show("make-share");
     } else {
-        hide("make-share");
+      hide("make-share");
     }
   });
+
+  if (isHardMode()) {
+    $("hardmode").style.fontWeight = "bold";
+  }
 
   await initializePlayAndUpdateUrl();
 })
@@ -613,6 +670,15 @@ async function initializePlay() {
 
 function isDaily(gameId) {
   return State.dailyGameId === gameId;
+}
+
+function isHardMode() {
+  return localStorage.getObjWithoutDefault("hardmode") || false;
+}
+
+function toggleHardMode() {
+  localStorage.setObj("hardmode", !isHardMode());
+  window.location.reload();
 }
 
 window.addEventListener('popstate', async (event) => {

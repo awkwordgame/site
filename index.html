@@ -50,11 +50,15 @@
     <br/>
     <div id="play-board" class="board"></div>
     <div class="footer centered">
+      <span id="guesses" class="hidden"></span>
       <span id="play-submit" class="action hidden" onclick="submit()">reveal</span>
       <span id="play-share" class="action hidden" onclick="share(State.currentGameId)">share</span>
-      <br/>
-      <br/>
-      <span id="next-game" style="font-size: small;"></span>
+      <div id="next-game" class="play-more"></div>
+      <div id="cant-wait" class="hidden play-more">
+        <span id="cant-wait-q" class="hidden">can't wait?</span>
+        <span class="pointer" onclick="showMakeGameAndUpdateUrl()"><b>make</b></span> or
+        <span class="pointer" onclick="goTo('https://twitter.com/search?q=%23myawkword')"><b>play others</b></span>
+      </div>
     </div>
   </div>
 
@@ -81,7 +85,6 @@
     <span style="flex: 1"></span>
     <div id="status" class="view-screen hidden">
       <span id="timestamp"></span>
-      <span>|</span>
       <span id="forget" class="underlined" onclick="forget()">forget</span>
     </div>
     <span id="make-random" class="make-screen underlined hidden" onclick="showMakeGame()">random</span>
@@ -101,6 +104,8 @@
     <!--    <span id="toggle-dark-mode" class="modal-button" onclick="toggleDarkMode()">dark</span>-->
     <!--    |-->
     <div style="margin-top: 10px">
+      <span id="hardmode" class="modal-button" onclick="toggleHardMode()">hard mode</span>
+      |
       <span id="clear-history" class="modal-button" onclick="clearHistory()">reset</span>
       |
       <a target="_blank" class="modal-button" style="text-decoration: none; color: inherit;"

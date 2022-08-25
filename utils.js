@@ -16,6 +16,18 @@ Storage.prototype.getObj = function (key) {
 
 function shade(node, color) {
   node.style.backgroundColor = color;
+  node.style.outline = "";
+  node.style.outlineOffset = "";
+}
+
+function shadeWithBorder(node, color) {
+  shade(node, color);
+  node.style.outline = "3px solid " + adjust(color, -20);
+  node.style.outlineOffset = "-3px";
+}
+
+function adjust(color, amount) {
+  return '#' + color.replace(/^#/, '').replace(/../g, color => ('0'+Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)).substr(-2));
 }
 
 function set(id, html) {
@@ -65,7 +77,7 @@ Base64 = {
   _Rixits:
 //   0       8       16      24      32      40      48      56     63
 //   v       v       v       v       v       v       v       v      v
-    "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+-",
+    "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!-",
   // You have the freedom, here, to choose the glyphs you want for
   // representing your base-64 numbers. The ASCII encoding guys usually
   // choose a set of glyphs beginning with ABCD..., but, looking at
@@ -180,7 +192,6 @@ function rot13(s) {
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".indexOf(c)])
 }
 
-
 function timer(id, prefix, expiredHtml, callback) {
   // Update the count down every 1 second
   const fn = function () {
@@ -211,6 +222,10 @@ function timer(id, prefix, expiredHtml, callback) {
   };
   let x = setInterval(fn, 1000);
   fn();
+}
+
+function goTo(url) {
+  window.location.href = url;
 }
 
 function tomorrow() {

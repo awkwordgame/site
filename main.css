@@ -32,6 +32,15 @@ input {
     font-weight: lighter;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
+.play-more {
+    font-size: small;
+    margin-top: 20px;
+}
+
 .grid-item {
     text-align: center;
     cursor: pointer;
@@ -64,6 +73,11 @@ input {
     cursor: pointer;
     font-size: x-large;
     border-bottom: 1px dashed;
+    margin-top: 25px;
+}
+
+#guesses {
+    font-size: large;
     margin-top: 25px;
 }
 
