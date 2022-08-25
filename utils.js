@@ -22,6 +22,7 @@ function shade(node, color) {
 
 function shadeWithBorder(node, color) {
   shade(node, color);
+  node.style.outlineStyle = "auto";
   node.style.outline = "3px solid " + adjust(color, -20);
   node.style.outlineOffset = "-3px";
 }
