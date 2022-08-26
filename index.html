@@ -9,14 +9,14 @@
   <script type="text/javascript" src="main.min.js"></script>
   <link rel="stylesheet" href="main.css">
 
-  <title>awkword - a daily word game</title>
-  <meta name="description" content="a daily word game"/>
+  <title>awkword - a word game</title>
+  <meta name="description" content="a word game"/>
 
-  <meta property="og:title" content="awkword - a daily word game"/>
+  <meta property="og:title" content="awkword - a word game"/>
   <meta property="og:url" content="https://awkword.co"/>
-  <meta property="og:image" content="https://awkword.co/game.png"/>
+  <meta property="og:image" content="https://awkword.co/assets/game.png"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="a daily word game"/>
+  <meta property="og:description" content="a word game"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta property="twitter:card" content="summary"/>
@@ -78,7 +78,7 @@
   </div>
 
   <div class="bottom">
-    <span id="misc" class="play-screen view-screen underlined">misc</span>
+    <span id="misc" class="play-screen view-screen make-screen underlined">misc</span>
     <span style="flex: 1"></span>
     <div id="status" class="view-screen hidden">
       <span id="timestamp"></span>
@@ -90,25 +90,40 @@
 
 <div id="modal" class="modal">
   <div class="modal-content">
-    <span class="close">&times;</span>
-    <h3 style="margin-top: 5px;">awkword - a daily word game</h3>
-    <p>given a <i>word</i> and a <i>number</i>, find that many words which are <i>associated</i> with the word.</p>
-    <hr/>
-    <p>click on <b>☰</b> to view your past games and stats.</p>
-    <hr/>
-    <p>make and play other awkwords while you wait for the daily game!</p>
-    <hr/>
-    <!--    <span id="toggle-dark-mode" class="modal-button" onclick="toggleDarkMode()">dark</span>-->
-    <!--    |-->
-    <div style="margin-top: 10px">
-      <span id="hardmode" class="modal-button" onclick="toggleHardMode()">hard mode</span>
-      |
-      <span id="clear-history" class="modal-button" onclick="clearHistory()">reset</span>
-      |
-      <a target="_blank" class="modal-button" style="text-decoration: none; color: inherit;"
-         href="https://twitter.com/awkwordgame">@awkwordgame</a>
-    </div>
+    <span id="modal-close">&times;</span>
+    <div id="modal-target"></div>
   </div>
+</div>
+
+<div id="play-modal" class="hidden">
+  <h3 style="margin-top: 5px;">awkword - a word game</h3>
+  <p>given a <i>word</i> and a <i>number</i>, find that many words which are <i>associated</i> with the word.</p>
+  <hr/>
+  <p>click on <b>☰</b> to view past games and stats.</p>
+  <hr/>
+  <p>make and play other awkwords while you wait for the daily game!</p>
+  <hr/>
+  <p>tap <i><b>misc</b></i> to see this info again.</p>
+  <hr/>
+  <!--    <span id="toggle-dark-mode" class="modal-button" onclick="toggleDarkMode()">dark</span>-->
+  <!--    |-->
+  <div style="margin-top: 10px">
+    <span id="hardmode" class="modal-button" onclick="toggleHardMode()">hard mode</span>
+    |
+    <span id="clear-history" class="modal-button" onclick="clearHistory()">reset</span>
+    |
+    <a target="_blank" class="modal-button" style="text-decoration: none; color: inherit;"
+       href="https://twitter.com/awkwordgame">@awkwordgame</a>
+  </div>
+</div>
+
+<div id="make-modal" class="hidden">
+  <h3 style="margin-top: 5px;">make an awkword</h3>
+  <p>think of a word that can help others select the highlighted words and avoid the rest. hopefully it's not too
+    <i>awk</i>word...</p>
+  <p>ex: <i>billiards</i> could be a good hint for <i>pool</i>, <i>bar</i>, and <i>sport</i></p>
+  <hr/>
+  <p>tap <i><b>random</b></i> to change up the words.</p>
 </div>
 </body>
 </html>
