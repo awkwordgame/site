@@ -72,7 +72,7 @@ input {
 .action {
     cursor: pointer;
     font-size: x-large;
-    border-bottom: 1px dashed;
+    font-weight: bold;
     margin-top: 25px;
 }
 
