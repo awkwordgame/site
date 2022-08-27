@@ -200,6 +200,7 @@ hr {
     justify-content: space-between;
     flex-flow: row wrap;
     align-items: center;
+    padding-right: 2px;
 }
 
 /* Extra small devices (phones, 600px and down) */
