@@ -37,8 +37,8 @@ input {
 }
 
 .play-more {
-    font-size: small;
-    margin-top: 20px;
+    font-size: medium;
+    margin-top: 5px;
 }
 
 #make-error {
@@ -66,6 +66,22 @@ input {
     font-size: medium;
 }
 
+.post-play-grid-item {
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0.3em;
+    font-size: medium;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.post-play-row {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+
 #stats {
     font-size: large;
     text-align: center;
@@ -88,9 +104,11 @@ input {
 
 .action {
     cursor: pointer;
-    font-size: x-large;
-    font-weight: bold;
-    margin-top: 25px;
+    font-size: large;
+    /*font-weight: bold;*/
+    text-decoration: underline;
+    /*background-color: #FAF9F6;*/
+    margin-top: 40px;
 }
 
 #guesses {
@@ -100,7 +118,6 @@ input {
 
 .modal-button {
     cursor: pointer;
-    font-size: large;
     border-bottom: 1px solid #ddd;
     margin-top: 25px;
 }
