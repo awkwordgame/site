@@ -1,4 +1,4 @@
-localStorage.setObj("wordlist2", [
+localStorage.set("wordlist2", [
     "abyss",
     "acid",
     "act",

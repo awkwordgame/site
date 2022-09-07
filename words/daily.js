@@ -1,4 +1,4 @@
-localStorage.setObj("daily", [
+localStorage.set("daily", [
     "9989788771675417321710798779795746876pbx",
     "8aaaaaapbbx",
     "8aaaaaapbbx",

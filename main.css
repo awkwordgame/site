@@ -91,8 +91,8 @@ input {
 #make-hint-input {
     font-size: x-large;
     outline: 0;
-    border-width: 0 0 0px;
-    /*border-color: #ddd;*/
+    border-width: 0 0 2px;
+    border-color: #ddd;
     box-sizing: content-box;
     text-align: right;
     margin: 0;
