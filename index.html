@@ -28,10 +28,14 @@
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZV1PKF7Q9Z"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-ZV1PKF7Q9Z');
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'G-ZV1PKF7Q9Z');
   </script>
 </head>
 
@@ -61,7 +65,7 @@
       <div id="next-game" class="play-more"></div>
       <div id="cant-wait" class="hidden play-more">
         <span id="cant-wait-q" class="hidden">can't wait?</span>
-        <span class="pointer" onclick="showMakeGameAndUpdateUrl()"><b>make</b></span> or
+        <span class="pointer" onclick="showMakeGameAndUpdateUrl()"><b>make</b></span> and
         <span class="pointer" onclick="goTo('https://twitter.com/search?q=%23myawkword')"><b>play others</b></span>
       </div>
     </div>
@@ -106,13 +110,16 @@
 
 <div id="play-modal" class="hidden">
   <h3 style="margin-top: 5px;">awkword - a word game</h3>
-  <p>given a <i>word</i> and a <i>number</i>, find that many words which are <i>associated</i> with the word.</p>
+  <p>given a <i>word</i> and a <i>number</i>, find that many words which are <span
+    class="correct-word-desc">associated</span> with the word.</p>
   <hr/>
   <p>click on <b>☰</b> to view past games and stats.</p>
   <hr/>
-  <p>make and play other awkwords while you wait for the daily game!</p>
+  <p><span class="pointer" onclick="showMakeGameAndUpdateUrl()"><b>make</b></span> and
+    <span class="pointer" onclick="goTo('https://twitter.com/search?q=%23myawkword')"><b>play other awkwords</b></span>
+    while you wait for the daily game!</p>
   <hr/>
-  <p>tap <i><b>misc</b></i> to see this info again.</p>
+  <p>tap <i class="underlined" style="color:#808080">misc</i> to see this info again.</p>
   <hr/>
   <div style="margin-top: 10px">
     <span id="hardmode" class="modal-button config" onclick="toggleConfig('hardmode')">hard mode</span>
@@ -130,7 +137,10 @@
 
 <div id="make-modal" class="hidden">
   <h3 style="margin-top: 5px;">make an awkword</h3>
-  <p>think of a word that can help others select the highlighted words and avoid the rest. hopefully it's not too
+  <p>think of a word to help others pick <span class="correct-word-desc">highlighted</span>
+    words and avoid the <span class="chosen-word-desc">rest</span>.
+    <br/><br/>
+    hopefully it's not too
     <i>awk</i>word...</p>
   <p>ex: <i>billiards</i> could be a good hint for <i>pool</i>, <i>bar</i>, and <i>sport</i></p>
   <hr/>
