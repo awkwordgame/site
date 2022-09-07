@@ -41,6 +41,11 @@ input {
     margin-top: 20px;
 }
 
+#make-error {
+    font-size: small;
+    margin-top: 20px;
+}
+
 .grid-item {
     text-align: center;
     cursor: pointer;
