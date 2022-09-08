@@ -48,13 +48,13 @@ input {
 
 .correct-word-desc {
     background-color: #CCFFEF;
-    border-radius: 5px;
+    border-radius: 3px;
     box-shadow: rgb(184, 235, 219) 0px 0px 0px 2px;
 }
 
 .chosen-word-desc {
     background-color: #E8E8E8;
-    border-radius: 5px;
+    border-radius: 3px;
     box-shadow: rgb(212, 212, 212) 0px 0px 0px 2px;
 }
 
