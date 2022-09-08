@@ -131,6 +131,7 @@ input {
     text-align: right;
     margin: 0;
     padding: 0;
+    border-radius: 0;
 }
 
 #make-hint-count {
@@ -174,7 +175,7 @@ hr {
 
 #logo {
     font-weight: bold;
-    font-size: xx-large;
+    font-size: x-large;
     cursor: pointer;
     margin: 0;
     min-height: 34px;
