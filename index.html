@@ -60,8 +60,8 @@
     <div id="play-board" class="board"></div>
     <div class="footer centered">
       <div id="guesses" class="hidden"></div>
-      <div id="play-submit" class="action hidden" onclick="submit()">reveal</div>
-      <div id="play-details" class="action hidden" onclick="showPostPlayModal()">details</div>
+      <span id="play-submit" class="action hidden" onclick="submit()">reveal</span>
+      <span id="play-details" class="action hidden" onclick="showPostPlayModal()">details</span>
     </div>
   </div>
 
@@ -69,7 +69,7 @@
     <br/>
     <div id="make-board" class="board"></div>
     <div class="footer centered">
-      <div id="make-share" class="make-screen action hidden" onclick="makeAndShare()">share</div>
+      <span id="make-share" class="make-screen action hidden" onclick="makeAndShare()">share</span>
       <div id="make-error" class="make-screen hidden"></div>
     </div>
   </div>
@@ -80,18 +80,18 @@
     <br/>
     <div id="view-board" class="board"></div>
     <div class="footer centered">
-      <div id="view-share" class="view-screen action hidden" onclick="share(State.currentGameId)">share</div>
+      <span id="view-share" class="view-screen action hidden" onclick="share(State.currentGameId)">share</span>
     </div>
   </div>
 
   <div class="bottom">
-    <span id="misc" class="play-screen view-screen make-screen underlined">misc</span>
+    <span id="misc" class="play-screen view-screen make-screen subaction">misc</span>
     <span style="flex: 1"></span>
     <div id="status" class="view-screen hidden">
       <span id="timestamp"></span>
-      <span id="forget" class="underlined" onclick="forget()">forget</span>
+      <span id="forget" class="subaction" onclick="forget()">forget</span>
     </div>
-    <span id="make-random" class="make-screen underlined hidden" onclick="showMakeGame()">random</span>
+    <span id="make-random" class="make-screen subaction hidden" onclick="showMakeGame()">random</span>
   </div>
 </div>
 
@@ -107,11 +107,11 @@
   <p>given a <i>word</i> and a <i>number</i>, find that many <span
     class="correct-word-desc">associated</span> words.</p>
   <hr/>
-  <p><span class="pointer underlined" onclick="showMakeGameAndUpdateUrl()">make</span> and
-    <span class="pointer underlined" onclick="goTo('https://twitter.com/search?q=%23myawkword')">play other awkwords</span>
+  <p><span class="subaction" onclick="showMakeGameAndUpdateUrl()">make</span> and
+    <span class="subaction" onclick="goTo('https://twitter.com/search?q=%23myawkword')">play other awkwords</span>
     while you wait for the daily game!</p>
   <hr/>
-  <p>click on <b>☰</b> to view past games and stats. tap <i class="underlined" style="color:#808080">misc</i> to see this info again.</p>
+  <p>click on <b>☰</b> to view past games and stats. tap <i class="subaction" style="color:#808080">misc</i> to see this info again.</p>
   <hr/>
   <div style="margin-top: 10px">
     <select id="game-modes" onchange="changeGameMode(this)">
@@ -121,9 +121,9 @@
       <option value="funmode">fun</option>
     </select>
     |
-    <span id="clear-history" class="modal-button" onclick="clearHistory()">reset</span>
+    <span id="clear-history" class="subaction" onclick="clearHistory()">reset</span>
     |
-    <a target="_blank" class="modal-button" style="text-decoration: none; color: inherit;"
+    <a target="_blank" class="subaction" style="text-decoration: none; color: inherit;"
        href="https://twitter.com/awkwordgame">@awkwordgame</a>
   </div>
 </div>
@@ -135,12 +135,11 @@
   <p>ex: <i>billiards</i> could be a good hint for <i>pool</i>, <i>bar</i>, and <i>sport</i></p>
   <p>hopefully it's not too awkward...</p>
   <hr/>
-  <p>tap <i class="underlined" style="color:#808080">random</i> to change up the words.</p>
+  <p>tap <i class="subaction" style="color:#808080">random</i> to change up the words.</p>
 </div>
 
 <div id="post-play-modal" class="hidden">
   <h3 id="post-play-title" style="margin-top: 5px; margin-bottom: 0;"></h3>
-  <hr/>
   <div id="post-play-stats" class="h1 centered" style="margin-top: 50px; margin-bottom: 30px;"></div>
   <div id="post-play-cells" class="post-play-row"></div>
   <div class="centered" style="margin-top: 40px">
@@ -148,8 +147,8 @@
     <div id="next-game" class="play-more" style="margin-top: 40px"></div>
     <div id="cant-wait" class="hidden play-more">
       <span id="cant-wait-q" class="hidden">can't wait?</span>
-      <span class="pointer underlined" onclick="showMakeGameAndUpdateUrl()">make</span> and
-      <span class="pointer underlined" onclick="goTo('https://twitter.com/search?q=%23myawkword')">play others</span>
+      <span class="subaction" onclick="showMakeGameAndUpdateUrl()">make</span> and
+      <span class="subaction" onclick="goTo('https://twitter.com/search?q=%23myawkword')">play others</span>
     </div>
   </div>
 </div>

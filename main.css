@@ -102,12 +102,12 @@ input {
 }
 
 .action {
+    border-bottom: 2px solid #ddd;
     cursor: pointer;
     font-size: large;
     /*font-weight: bold;*/
-    text-decoration: underline;
+    /*text-decoration: underline;*/
     /*background-color: #FAF9F6;*/
-    margin-top: 40px;
 }
 
 #guesses {
@@ -115,10 +115,9 @@ input {
     margin-top: 25px;
 }
 
-.modal-button {
+.subaction {
+    border-bottom: 2px solid #ddd;
     cursor: pointer;
-    border-bottom: 1px solid #ddd;
-    margin-top: 25px;
 }
 
 #make-hint-input {
@@ -169,7 +168,7 @@ hr {
 }
 
 .footer {
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .status {
@@ -216,10 +215,6 @@ hr {
     cursor: pointer;
     font-size: small;
     color: #808080;
-}
-
-.underlined {
-    text-decoration: underline;
 }
 
 .body {
