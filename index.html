@@ -104,8 +104,8 @@
 
 <div id="play-modal" class="hidden">
   <h3 style="margin-top: 5px;">awkword - a word game</h3>
-  <p>given a <i>word</i> and a <i>number</i>, find that many words which are <span
-    class="correct-word-desc">associated</span> with the word.</p>
+  <p>given a <i>word</i> and a <i>number</i>, find that many <span
+    class="correct-word-desc">associated</span> words.</p>
   <hr/>
   <p><span class="pointer underlined" onclick="showMakeGameAndUpdateUrl()">make</span> and
     <span class="pointer underlined" onclick="goTo('https://twitter.com/search?q=%23myawkword')">play other awkwords</span>
@@ -130,7 +130,7 @@
 
 <div id="make-modal" class="hidden">
   <h3 style="margin-top: 5px;">make an awkword</h3>
-  <p>think of a word to help others pick <span class="correct-word-desc">highlighted</span>
+  <p>think of a <span class="make-modal-word">word</span> to help others pick <span class="correct-word-desc">highlighted</span>
     words and avoid the <span class="chosen-word-desc">rest</span>.</p>
   <p>ex: <i>billiards</i> could be a good hint for <i>pool</i>, <i>bar</i>, and <i>sport</i></p>
   <p>hopefully it's not too awkward...</p>
@@ -144,7 +144,7 @@
   <div id="post-play-stats" class="h1 centered" style="margin-top: 50px; margin-bottom: 30px;"></div>
   <div id="post-play-cells" class="post-play-row"></div>
   <div class="centered" style="margin-top: 40px">
-    <div id="play-share" class="action hidden" onclick="share(State.currentGameId)">share</div>
+    <span id="play-share" class="action hidden" onclick="share(State.currentGameId)">share</span>
     <div id="next-game" class="play-more" style="margin-top: 40px"></div>
     <div id="cant-wait" class="hidden play-more">
       <span id="cant-wait-q" class="hidden">can't wait?</span>
